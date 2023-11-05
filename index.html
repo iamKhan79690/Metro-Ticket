@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metro Ticket</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 class="h1">Ticket For Metro</h1>
+
+    <input type="number" id="for_male" placeholder="Enter Your Age" class="Male" required>
+    <button class="button" onclick="calculatePrice('male')">For Male</button><br>
+
+    <input type="number" id="for_female" placeholder="Enter Your Age" class="Female" required>
+    <button class="button" onclick="calculatePrice('female')">For Female</button><br>
+
+    <h1 id="result"></h1>
+
+    <script>
+        function calculatePrice(gender) {
+            const ageInput = document.getElementById(`for_${gender}`);
+            const age = parseFloat(ageInput.value);
+
+            if (isNaN(age)) {
+                document.getElementById('result').innerHTML = "Please enter a valid age.";
+                return;
+            }
+
+            let Price = 100;
+
+            if (gender === 'female') {
+                // Apply a 50% discount for females
+                Price *= 0.5;
+            }
+
+            if (age <= 5) {
+                Price -= 100;
+            } else if (age <= 8) {
+                Price -= 50;
+            } else if (age >= 65) {
+                Price -= 30;
+            }
+
+            document.getElementById('result').innerHTML = `Your Price is $${Price}`;
+        }
+    </script>
+</body>
+</html>
